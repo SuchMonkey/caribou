@@ -1,0 +1,8 @@
+[package]
+name = "caribou"
+version = "0.1.0"
+authors = ["David <suchmonkey@protonmail.com>"]
+
+[dependencies]
+dotenv = "0.11.0"
+postgres = "0.15.2"

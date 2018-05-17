@@ -1,0 +1,15 @@
+{
+    "sqltools.connections": [
+        {
+            "name": "Caribou",
+            "server": "127.0.0.1",
+            "dialect": "PostgreSQL",
+            "port": 5432,
+            "database": "caribou",
+            "username": "suchmonkey",
+            "askForPassword": false,
+            "password": null,
+            "connectionTimeout": 15
+        }
+    ]
+}
