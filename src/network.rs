@@ -1,20 +1,23 @@
-mod node;
+use redis;
+use redis::{Connection, RedisResult};
 
-use node::{IntNode, Node, NodeState}
+use node::{IntNode, Node, NodeState};
 
-struct Network {
-    redis_stuff: String,
+pub struct Network {
+    client: RedisResult<Connection>,
 }
 
 impl Network {
-    fn new() -> Self {
+    pub fn new(url: &str) -> Self {
+        let client = try!(redis::Client::open(url));
+
         Network {
-            redis_stuff: "redis connection".to_string(),
+            client: try!(client.get_connection()),
         }
     }
 
-    fn integrate(node: Node) -> IntNode {
-        IntNode::new(node)
+    pub fn integrate<'a, T>(&'a self, node: T) -> IntNode<'a, T> {
+        IntNode::new(&self, node)
     }
 
     fn queu_action() {
@@ -28,7 +31,7 @@ impl Network {
         // and the caller reciefes the current network state and can resolve
         // conflicts on spot
         // that's how it's done bby
-        // this allows for all nodes to borrow a network but never does one need to have a mutation 
+        // this allows for all nodes to borrow a network but never does one need to have a mutation
         // ref to borrow... now mutexes or mybe not?^^
         // network can alwasy cell mutatie as the only src of truth
     }

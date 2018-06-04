@@ -1,13 +1,24 @@
+use network::Network;
+
 pub enum NodeState {
-    INT_NODE,
-    NODE,
+    IntNode,
+    Node,
 }
 
-pub struct IntNode<T> {
+pub struct IntNode<'a, T> {
     node: T,
-    net: &Network,
+    net: &'a Network,
+}
+
+impl<'a, T> IntNode<'a, T> {
+    pub fn new(net: &'a Network, node: T) -> Self {
+        IntNode {
+            node: node,
+            net: net,
+        }
+    }
 }
 
 pub trait Node {
-    fn new() -> self;
+    fn new() -> Self;
 }
